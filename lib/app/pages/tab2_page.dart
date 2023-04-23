@@ -11,6 +11,7 @@ class Tab2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Get access to the NewsService Provider via context
     final newsService = Provider.of<NewsService>(context);
 
     return SafeArea(
@@ -46,6 +47,7 @@ class _ListaCategorias extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Get access to the NewsService Provider via context
     final categories = Provider.of<NewsService>(context).categories;
 
     return Container(
@@ -86,6 +88,7 @@ class _CategoryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Get access to the NewsService Provider via context
     final newsService = Provider.of<NewsService>(context);
 
     return GestureDetector(

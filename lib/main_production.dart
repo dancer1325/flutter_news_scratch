@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
     // Required in case you need several providers
     return MultiProvider(
       providers: [
+        // NewsService Provider at highest level of the application
+        // lazy   By default, it's true === Just instantiated once some Widget needs it
         ChangeNotifierProvider(create: (_)=> new NewsService() ),
       ],
       child: MaterialApp(

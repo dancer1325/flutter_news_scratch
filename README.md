@@ -175,6 +175,10 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
     * Get the dependencies listed in the 'pubspec.yaml'
 
 ## How to run?
+* Configuration
+  * [NewsAPI](https://newsapi.org/)
+    * Create an account
+    * Get an APIKey
 * Configure your device
     * Simulator
         * Built-in IDE
@@ -200,6 +204,8 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 * Architecture
   * 'models'
     * Model mirror the data
+    * 'news_models'
+      * It has been generated from the [NewsApiResponses](https://newsapi.org/docs/endpoints) and via [QuictkType.io](https://quicktype.io/)
   * 'services'
     * Handle HTTP requests
   * 'theme'

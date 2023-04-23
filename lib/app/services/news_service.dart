@@ -5,8 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
 const _URL_NEWS = 'https://newsapi.org/v2';
-const _APIKEY = '431a2b39236d43baaafbf67530faa12d';
+const _APIKEY = '431a2b39236d43baaafbf67530faa12d';     // It shouldn't be pushed
 
+// ChangeNotifier      Declare as part of Material App's widgets, to share the information
+// Required to make all about this class, to be accessible from the context in any part of the Flutter application
 class NewsService with ChangeNotifier {
   List<Article> headlines = [];
   String _selectedCategory = 'business';
