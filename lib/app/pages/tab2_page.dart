@@ -52,9 +52,11 @@ class _ListaCategorias extends StatelessWidget {
       width: double.infinity,
       height: 80,
       child: ListView.builder(
+        // Allows scrolling beyond the limits, although there are no widgets. Default behaviour in IoS
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
+        // itemBuilder      Define how to create each Widget of the list
         itemBuilder: (BuildContext context, int index) {
 
           final cName = categories[index].name;

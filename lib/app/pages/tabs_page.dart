@@ -8,6 +8,7 @@ class TabsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The ChangeNotifier is accessible just to the child
     return ChangeNotifierProvider(
       create: (_) => new _NavegacionModel(),
       child: Scaffold(
@@ -23,13 +24,13 @@ class _Navegacion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Get access to the NavegacionModel Provider via context
     final navegacionModel = Provider.of<_NavegacionModel>(context);
 
-
     return BottomNavigationBar(
-      currentIndex: navegacionModel.paginaActual,
-      onTap: (i) => navegacionModel.paginaActual = i,
-      items: [
+      currentIndex: navegacionModel.paginaActual,           // Indicate which item is selected
+      onTap: (i) => navegacionModel.paginaActual = i,       // Invoke to the setter in which we added the `notifyListeners()`
+      items: [      // Good practise to specify the type. >=2 items
         // BottomNavigationBarItem( icon: Icon( Icons.person_outline ), title: Text('Para ti') ),
         // BottomNavigationBarItem( icon: Icon( Icons.public ), title: Text('Encabezados') ),
         // BottomNavigationBarItem( icon: Icon( Icons.person_outline ), tooltip: 'Para ti' ),
@@ -46,12 +47,14 @@ class _Paginas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Get access to the NavegacionModel Provider via context
     final navegacionModel = Provider.of<_NavegacionModel>(context);
 
     return PageView(
-      controller: navegacionModel.pageController,
+      controller: navegacionModel.pageController,     // Controls which page is visible in the view === the navigation
+      // BouncingScrollPhysics()         Allows scrolling beyond the limits, although there are no widgets. Default behaviour in IoS
       // physics: BouncingScrollPhysics(),
-      physics: NeverScrollableScrollPhysics(),
+      physics: NeverScrollableScrollPhysics(),          // Avoid navigating
       children: <Widget>[
 
         Tab1Page(),
@@ -66,17 +69,18 @@ class _Paginas extends StatelessWidget {
 class _NavegacionModel with ChangeNotifier{
 
   int _paginaActual = 0;
-  PageController _pageController = new PageController();
+  PageController _pageController = new PageController();    // initialPage      by default is 0
+  //PageController _pageController = new PageController(initialPage: 1);    // Second item in the PageView would be displayed
 
 
   int get paginaActual => this._paginaActual;
-  
   set paginaActual( int valor ) {
     this._paginaActual = valor;
 
+    // Change the item of the PageView to be displayed === navigate
     _pageController.animateToPage(valor, duration: Duration(milliseconds: 250), curve: Curves.easeOut );
 
-    notifyListeners();
+    notifyListeners();    // Notify to all widget that it has been changed --> Force to redraw all the widgets
   }
 
   PageController get pageController => this._pageController;

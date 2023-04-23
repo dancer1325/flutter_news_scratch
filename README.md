@@ -5,6 +5,7 @@
 [![License: MIT][license_badge]][license_link]
 
 * Mirror of [thisProject](https://github.com/Klerith/news-flutter), but updated to v2
+  * App of tabs
   * Put in practise all learnt
     * Provider
     * HTTP

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
     SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle.light );
 
-
+    // Required in case you need several providers
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> new NewsService() ),
