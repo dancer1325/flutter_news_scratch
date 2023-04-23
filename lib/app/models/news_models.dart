@@ -58,7 +58,7 @@ class Article {
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
         source: Source.fromJson(json["source"] as Map<String, dynamic>),
-        author: json["author"]?.json["author"].toString(),
+        author: json["author"]?.toString(),
         title: json["title"].toString(),
         description: json["description"].toString(),
         url: json["url"].toString(),
