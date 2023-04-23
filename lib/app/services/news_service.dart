@@ -68,8 +68,11 @@ class NewsService with ChangeNotifier {
       return this.categoryArticles[category];
     }
 
+    // Nothing found in ca
+    // final url =
+    //     '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=ca&category=$category';
     final url =
-        '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=ca&category=$category';
+        '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=us&category=$category';
     final resp = await http.get(Uri.parse(url));
 
     final newsResponse = newsResponseFromJson(resp.body);

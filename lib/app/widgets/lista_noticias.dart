@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_scratch/app/models/news_models.dart';
 import 'package:flutter_news_scratch/app/theme/tema.dart';
 
-
+// Widget to be reused in both pages
 class ListaNoticias extends StatelessWidget {
 
   final List<Article> noticias;
