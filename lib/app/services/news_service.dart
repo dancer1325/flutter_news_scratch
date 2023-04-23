@@ -22,7 +22,7 @@ class NewsService with ChangeNotifier {
     Category(FontAwesomeIcons.volleyballBall, 'sports'),
     Category(FontAwesomeIcons.memory, 'technology'),
   ];
-  Map<String, List<Article>> categoryArticles = {};
+  Map<String, List<Article>> categoryArticles = {};     // Store / Cache the articles, to avoid making repetitive calls
 
   NewsService() {
     getTopHeadlines();
@@ -42,30 +42,32 @@ class NewsService with ChangeNotifier {
 
     _isLoading = true;
     getArticlesByCategory(valor);
-    notifyListeners();
+    notifyListeners();    // Notify to all widget that it has been changed --> Force to redraw all the widgets
   }
 
   List<Article>? get getArticulosCategoriaSeleccionada =>
       categoryArticles[selectedCategory];
 
-  getTopHeadlines() async {
+  Future<void> getTopHeadlines() async {
     // In CA, urlToImage is always null
     //final url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=ca';
-    final url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=us';
+    const url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=us';
     final resp = await http.get(Uri.parse(url));
 
     final newsResponse = newsResponseFromJson(resp.body);
 
-    this.headlines.addAll(newsResponse.articles);
-    notifyListeners();
+    headlines.addAll(newsResponse.articles);
+    notifyListeners();      // Notify to all widget that it has been changed --> Force to redraw all the widgets
   }
 
-  getArticlesByCategory(String category) async {
-    if (this.categoryArticles[category]?.length != null &&
-        this.categoryArticles[category]!.length > 0) {
-      this._isLoading = false;
-      notifyListeners();
-      return this.categoryArticles[category];
+  Future<void> getArticlesByCategory(String category) async {
+    // In case a category with elements has been already requested and we have already cached / stored in this map
+    if (categoryArticles[category]?.length != null &&
+        categoryArticles[category]!.isNotEmpty) {
+      _isLoading = false;
+      notifyListeners();      // Notify to all widget that it has been changed --> Force to redraw all the widgets
+      categoryArticles[category];
+      return;
     }
 
     // Nothing found in ca
@@ -77,9 +79,9 @@ class NewsService with ChangeNotifier {
 
     final newsResponse = newsResponseFromJson(resp.body);
 
-    this.categoryArticles[category]?.addAll(newsResponse.articles);
+    categoryArticles[category]?.addAll(newsResponse.articles);
 
-    this._isLoading = false;
-    notifyListeners();
+    _isLoading = false;
+    notifyListeners();      // Notify to all widget that it has been changed --> Force to redraw all the widgets
   }
 }

@@ -128,7 +128,7 @@ class _TarjetaImagen extends StatelessWidget {
   }
 
   FadeInImage buildFadeInImage() {
-    print('noticia.urlToImage ${ noticia.toJson()['urlToImage']}');
+    // print('noticia.urlToImage ${ noticia.toJson()['urlToImage']}');
     return FadeInImage(
                 placeholder: const AssetImage( 'assets/img/giphy.gif' ),
                 image: NetworkImage( noticia.urlToImage.toString() )

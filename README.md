@@ -210,3 +210,5 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
     * Handle HTTP requests
   * 'theme'
     * Global application theme
+* 'font_awesome'
+  * Dependency with a full suite of icons

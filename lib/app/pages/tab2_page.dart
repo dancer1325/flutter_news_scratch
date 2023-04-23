@@ -29,6 +29,7 @@ class Tab2Page extends StatelessWidget {
             if ( newsService.isLoading )
             const Expanded(
               child: Center(
+                // CircularProgressIndicator     Widget which shows a circular loading
                 child: CircularProgressIndicator(),
               )
             )
@@ -91,9 +92,11 @@ class _CategoryButton extends StatelessWidget {
     // Get access to the NewsService Provider via context
     final newsService = Provider.of<NewsService>(context);
 
+    // It allows doing navigation based on Tap event
     return GestureDetector(
       onTap: (){
         // print('${ categoria.name }');
+        // listen: false    If it's true, it would throw an error since it's into the method
         final newsService = Provider.of<NewsService>(context, listen: false);
         newsService.selectedCategory = categoria.name;
       },
