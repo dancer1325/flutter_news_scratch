@@ -8,22 +8,19 @@ class ListaNoticias extends StatelessWidget {
 
   final List<Article> noticias;
 
-  const ListaNoticias( this.noticias );
-
+  ListaNoticias( this.noticias );
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.builder(    // Widget which allows making scroll
       itemCount: this.noticias.length,
       itemBuilder: (BuildContext context, int index) {
-
 
         return _Noticia( noticia: this.noticias[index], index: index );
      }
     );
   }
 }
-
 
 class _Noticia extends StatelessWidget {
 
@@ -39,6 +36,7 @@ class _Noticia extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        // Most of next Widgets pass through Article noticia
         _TarjetaTopBar( noticia, index ),
 
         _TarjetaTitulo( noticia ),
@@ -46,7 +44,6 @@ class _Noticia extends StatelessWidget {
         _TarjetaImagen( noticia ),
 
         _TarjetaBody( noticia ),
-
 
         _TarjetaBotones(),
 
@@ -58,7 +55,6 @@ class _Noticia extends StatelessWidget {
     );
   }
 }
-
 
 class _TarjetaBotones extends StatelessWidget {
 
@@ -92,7 +88,6 @@ class _TarjetaBotones extends StatelessWidget {
   }
 }
 
-
 class _TarjetaBody extends StatelessWidget {
   
   final Article noticia;
@@ -114,23 +109,30 @@ class _TarjetaImagen extends StatelessWidget {
 
   const _TarjetaImagen( this.noticia );
 
-
   @override
   Widget build(BuildContext context) {
+    // Wrap under Container to adjust the margin
     return Container(
       margin: EdgeInsets.symmetric( vertical: 10 ),
+      // Wrap under ClipRRect, in order to apply the blur just to the specific container and add the borderRadius
       child: ClipRRect(
         borderRadius: BorderRadius.only( topLeft: Radius.circular(50), bottomRight: Radius.circular(50) ),
         child: Container(
           child: ( noticia.urlToImage != null ) 
-              ? FadeInImage(
-                  placeholder: AssetImage( 'assets/img/giphy.gif' ), 
-                  image: NetworkImage( noticia.urlToImage! )
-                )
+              ?
+          buildFadeInImage()
               : Image( image: AssetImage('assets/img/no-image.png'), )
         ),
       ),
     );
+  }
+
+  FadeInImage buildFadeInImage() {
+    print('noticia.urlToImage ${ noticia.toJson()['urlToImage']}');
+    return FadeInImage(
+                placeholder: const AssetImage( 'assets/img/giphy.gif' ),
+                image: NetworkImage( noticia.urlToImage.toString() )
+              );
   }
 }
 
@@ -148,9 +150,6 @@ class _TarjetaTitulo extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class _TarjetaTopBar extends StatelessWidget {
 

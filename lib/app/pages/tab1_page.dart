@@ -20,6 +20,7 @@ class _Tab1PageState extends State<Tab1Page> with AutomaticKeepAliveClientMixin 
     return Scaffold(
       body: ( headlines.isEmpty )
           ? const Center(child: CircularProgressIndicator() )
+                // CircularProgressIndicator     Widget which shows a circular loading
           : ListaNoticias( headlines )
    );
   }

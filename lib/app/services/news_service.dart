@@ -49,7 +49,9 @@ class NewsService with ChangeNotifier {
       categoryArticles[selectedCategory];
 
   getTopHeadlines() async {
-    final url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=ca';
+    // In CA, urlToImage is always null
+    //final url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=ca';
+    final url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=us';
     final resp = await http.get(Uri.parse(url));
 
     final newsResponse = newsResponseFromJson(resp.body);
